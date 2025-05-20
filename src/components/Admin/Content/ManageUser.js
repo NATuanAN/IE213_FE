@@ -50,16 +50,16 @@ const ManageUser = () => {
 
     // fetch list all users
     // componentdidmount
-    // useEffect(() => {
-    //     fetchListUsers();
-    //     // console.log(res.DT);
-    // }, []);
-    // const fetchListUsers = async () => {
-    //     let res = await getAllUsers();
-    //     if (res.EC === 0) {
-    //         setListUser(res.DT);
-    //     }
-    // };
+    useEffect(() => {
+        fetchListUsers();
+        // console.log(res.DT);
+    }, []);
+    const fetchListUsers = async () => {
+        let res = await getAllUsers();
+        if (res.EC === 0) {
+            setListUser(res.DT);
+        }
+    };
 
     return (
         <div className="manage-user-container">

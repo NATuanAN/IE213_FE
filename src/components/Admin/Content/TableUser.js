@@ -19,7 +19,7 @@ const TableUser = (props) => {
                         listUser.map((item, index) => {
                             return (
                                 <tr key={"table-users-" + index}>
-                                    <td>{item.id}</td>
+                                    <td>{item._id}</td>
                                     <td>{item.email}</td>
                                     <td>{item.username}</td>
                                     <td>{item.role}</td>

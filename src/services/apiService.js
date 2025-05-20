@@ -25,7 +25,7 @@ const putUpdateUser = async (data) => {
 };
 
 const deleteUser = async (userid) => {
-    return await axios.delete("/api/v1/participant", { data: { id: userid } });
+    return await axios.delete("/api/v1/participant", { data: { _id: userid } });
 };
 const getUserWithPaginate = async (page, limit) => {
     return await axios.get(
