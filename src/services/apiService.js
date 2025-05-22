@@ -111,20 +111,20 @@ const postCreateNewAnswerForQuestion = (
 };
 
 export {
-    postCreateNewUser,
-    getAllUsers,
-    putUpdateUser,
-    deleteUser,
+    postCreateNewUser,//
+    getAllUsers,//
+    putUpdateUser,//
+    deleteUser,//
     getUserWithPaginate,
-    postLogin,
-    postRegister,
-    getQuizByUser,
-    getDataQuiz,
+    postLogin,//
+    postRegister,//
+    getQuizByUser,//
+    getDataQuiz,//
     postSubmitQuiz,
-    postCreateNewQuiz,
-    getAllQuizForAdmin,
-    putUpdateQuizForAdmin,
-    deleteQuizForAdmin,
+    postCreateNewQuiz,//
+    getAllQuizForAdmin,//
+    putUpdateQuizForAdmin,//
+    deleteQuizForAdmin,//
     postCreateNewAnswerForQuestion,
     postCreateNewQuestionForQuiz,
 };
