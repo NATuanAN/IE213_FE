@@ -18,7 +18,7 @@ const Header = () => {
             <Container>
                 {/* <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand> */}
                 <NavLink to="/" className="navbar-brand">
-                    Hoidan IT
+                    GROUP 14
                 </NavLink>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
@@ -36,9 +36,9 @@ const Header = () => {
                     <Nav className="me-auto">
                         <NavLink to="/" className="nav-link">Home</NavLink>
 
-                        <NavLink to="/users" className="nav-link">
-                            User
-                        </NavLink>
+                        {isAuthenticated && (account.role === "USER" || account.role === "ADMIN") && (
+                            <NavLink to="/users" className="nav-link">User</NavLink>
+                        )}
 
                         {account.role === "ADMIN" && (
                             <NavLink to="/admins" className="nav-link">Admin</NavLink>
@@ -56,7 +56,7 @@ const Header = () => {
                                 >
                                     Log in
                                 </button>
-                                <button className="btn-signup">Sige up</button>
+                                <button className="btn-signup">Sign up</button>
                             </>
                         ) : (
                             <NavDropdown

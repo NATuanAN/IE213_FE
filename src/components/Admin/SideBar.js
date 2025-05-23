@@ -49,12 +49,12 @@ const SideBar = (props) => {
                         }}
                     >
                         <DiReact size={"3em"} color={"00bfff"} />
-                        <span onClick={() => navigate("/")}>Hoi Dan IT</span>
+                        <span onClick={() => navigate("/")}>GROUP 14</span>
                     </div>
                 </SidebarHeader>
 
                 <SidebarContent>
-                    <Menu iconShape="circle">
+                    {/* <Menu iconShape="circle">
                         <MenuItem
                             icon={<MdDashboard />}
                         // component={<Link to="/admin" />}
@@ -62,7 +62,7 @@ const SideBar = (props) => {
                             Dashboard
                             <Link to="/admins" />
                         </MenuItem>
-                    </Menu>
+                    </Menu> */}
                     <Menu iconShape="circle">
                         <SubMenu icon={<FaGem />} title="Features">
                             <MenuItem>
