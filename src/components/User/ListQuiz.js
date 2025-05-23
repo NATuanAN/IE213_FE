@@ -27,11 +27,17 @@ const ListQuiz = (props) => {
                         className="card"
                         style={{ width: "18rem" }}
                     >
-                        <img
+                        {/* <img
                             src={`data:image/jpeg;base64,${quiz.image}`}
                             className="card-img-top"
                             alt="img"
-                        ></img>
+                        ></img> */}
+                        <img
+                            src={`http://localhost:8081/uploadsQuizz/${quiz.quizImage}`}
+                            className="card-img-top"
+                            alt="quiz"
+                        />
+
                         <div className="card-body">
                             <h5 className="card-title">Quiz {index + 1}</h5>
                             <p className="card-text">{quiz.description}</p>
@@ -40,7 +46,7 @@ const ListQuiz = (props) => {
                                 onClick={() => {
                                     navigate(`/quiz/${quiz.id}`, { state: { quizTitle: quiz.description } });
                                 }}
-                            > 
+                            >
                                 Start now
                             </button>
                         </div>

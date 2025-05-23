@@ -44,11 +44,12 @@ const Login = (props) => {
         // submit apis
         let data = await postLogin(email, password);
         if (data && data.EC === 0) {
-            dispatch(doLogin(data));
+            dispatch(doLogin(data.DT));  // Chỉ truyền phần DT vào payload thôi
             toast.success(data.EM);
             setIsLoading(false);
             navigate("/");
         }
+
         if (data && +data.EC !== 0) {
             toast.error(data.EM);
             setIsLoading(false);
