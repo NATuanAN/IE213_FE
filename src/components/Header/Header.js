@@ -22,7 +22,7 @@ const Header = () => {
                 </NavLink>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
+                    {/* <Nav className="me-auto">
                         <NavLink to="/" className="nav-link">
                             Home
                         </NavLink>
@@ -32,7 +32,19 @@ const Header = () => {
                         <NavLink to="/admins" className="nav-link">
                             Admin
                         </NavLink>
+                    </Nav> */}
+                    <Nav className="me-auto">
+                        <NavLink to="/" className="nav-link">Home</NavLink>
+
+                        <NavLink to="/users" className="nav-link">
+                            User
+                        </NavLink>
+
+                        {account.role === "ADMIN" && (
+                            <NavLink to="/admins" className="nav-link">Admin</NavLink>
+                        )}
                     </Nav>
+
                     <Nav>
                         {isAuthenticated === false ? (
                             <>

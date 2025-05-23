@@ -57,7 +57,7 @@ const SideBar = (props) => {
                     <Menu iconShape="circle">
                         <MenuItem
                             icon={<MdDashboard />}
-                            // component={<Link to="/admin" />}
+                        // component={<Link to="/admin" />}
                         >
                             Dashboard
                             <Link to="/admins" />

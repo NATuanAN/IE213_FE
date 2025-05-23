@@ -38,7 +38,7 @@ const Questions = (props) => {
         title: "",
         url: "",
     });
-    
+
 
 
     const handleAddRemoveQuestion = (type, id) => {
@@ -204,7 +204,7 @@ const Questions = (props) => {
                                         <span>
                                             {question.imageName ? (
                                                 <span
-                                                    style={{cursor: "pointer"}}
+                                                    style={{ cursor: "pointer" }}
                                                     onClick={() =>
                                                         handlePreviewImage(
                                                             question.id
@@ -304,18 +304,18 @@ const Questions = (props) => {
                                                     </span>
                                                     {question.answers.length >
                                                         1 && (
-                                                        <span
-                                                            onClick={() =>
-                                                                handleAddRemoveAnswer(
-                                                                    "REMOVE",
-                                                                    question.id,
-                                                                    answer.id
-                                                                )
-                                                            }
-                                                        >
-                                                            <AiOutlineMinusCircle className="icon-remove" />
-                                                        </span>
-                                                    )}
+                                                            <span
+                                                                onClick={() =>
+                                                                    handleAddRemoveAnswer(
+                                                                        "REMOVE",
+                                                                        question.id,
+                                                                        answer.id
+                                                                    )
+                                                                }
+                                                            >
+                                                                <AiOutlineMinusCircle className="icon-remove" />
+                                                            </span>
+                                                        )}
                                                 </div>
                                             </div>
                                         );

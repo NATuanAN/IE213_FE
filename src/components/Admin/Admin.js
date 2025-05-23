@@ -1,12 +1,25 @@
 import SideBar from "./SideBar";
 import "./Admin.scss";
 import { FaBars } from "react-icons/fa";
-import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import { useSelector } from "react-redux";
 
-const Admin = (props) => {
+const Admin = () => {
     const [collapsed, setCollapsed] = useState(false);
+    const navigate = useNavigate();
+    const role = useSelector((state) => state.user.account.role);
+
+    useEffect(() => {
+        if (role !== "ADMIN") {
+            navigate("/unauthorized");
+        }
+    }, [role, navigate]);
+
+    if (role !== "ADMIN") {
+        return null; // Tránh hiển thị Admin layout
+    }
 
     return (
         <div className="admin-container">
@@ -26,4 +39,5 @@ const Admin = (props) => {
         </div>
     );
 };
+
 export default Admin;
