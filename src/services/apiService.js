@@ -99,10 +99,7 @@ const postCreateNewQuestionForQuiz = (quiz_id, description, image) => {
 };
 
 const postCreateNewAnswerForQuestion = (
-    description,
-    correct_answer,
-    question_id
-) => {
+    description, correct_answer, question_id) => {
     return axios.post("api/v1/answer", {
         description,
         correct_answer,

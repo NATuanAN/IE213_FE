@@ -210,22 +210,22 @@ const Questions = (props) => {
 
         //submit question
         for (const question of questions) {
-            await postCreateNewQuestionForQuiz(
-                +selectedQuiz.value,
+            const resQ = await postCreateNewQuestionForQuiz(
+                selectedQuiz.value,
                 question.description,
                 question.imageFile
             );
-            //submit answer
+            const questionId = resQ?.DT?.question_id;
             for (const answer of question.answers) {
                 await postCreateNewAnswerForQuestion(
                     answer.description,
                     answer.isCorrect,
-                    q.DT.id
+                    questionId
                 );
             }
         }
         toast.success("Create questions and answer succed!");
-        setQuestions(initQuestionsg);
+        setQuestions(initQuestions);
     };
 
     return (
