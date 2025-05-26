@@ -21,35 +21,72 @@ const DetailQuiz = () => {
         fetchQuestion();
     }, [quizId]);
 
+    // const fetchQuestion = async () => {
+    //     let res = await getDataQuiz(quizId);
+
+    //     if (res && res.EC === 0) {
+    //         let raw = res.DT;
+    //         let data = _.chain(raw)
+    //             //Group the elements of array based on 'id' property
+    //             .groupBy("id")
+    //             //'key' is group'name (color),"value " is the array of objects
+    //             .map((value, key) => {
+    //                 let answers = [];
+    //                 let questionDescription,
+    //                     image = "";
+    //                 value.forEach((item, index) => {
+    //                     if (index === 0) {
+    //                         questionDescription = item.description;
+    //                         image = item.image;
+    //                     }
+    //                     item.answers.issSelected = false;
+    //                     answers.push(item.answers);
+    //                 });
+    //                 return {
+    //                     questionId: key,
+    //                     answers,
+    //                     questionDescription,
+    //                     image,
+    //                 };
+    //             })
+    //             .value();
+    //         setDataQuiz(data);
+    //     }
+    // };
     const fetchQuestion = async () => {
         let res = await getDataQuiz(quizId);
 
         if (res && res.EC === 0) {
             let raw = res.DT;
             let data = _.chain(raw)
-                //Group the elements of array based on 'id' property
-                .groupBy("id")
-                //'key' is group'name (color),"value " is the array of objects
+                .groupBy("question_id")
                 .map((value, key) => {
                     let answers = [];
-                    let questionDescription,
-                        image = "";
+                    let questionDescription, image = "";
+
                     value.forEach((item, index) => {
                         if (index === 0) {
                             questionDescription = item.description;
-                            image = item.image;
+                            image = item.questionImage;
                         }
-                        item.answers.issSelected = false;
-                        answers.push(item.answers);
+
+                        if (Array.isArray(item.answers)) {
+                            item.answers.forEach(ans => {
+                                ans.issSelected = false;
+                            });
+                            answers.push(...item.answers);
+                        }
                     });
+
                     return {
-                        questionId: key,
+                        question_id: key,
                         answers,
                         questionDescription,
                         image,
                     };
                 })
                 .value();
+
             setDataQuiz(data);
         }
     };
@@ -64,10 +101,31 @@ const DetailQuiz = () => {
         }
     };
 
+    // const handleCheckbox = (answerId, questionId) => {
+    //     let dataQuizClone = _.cloneDeep(dataQuiz); // react hook doesn't merge state
+    //     let question = dataQuizClone.find(
+    //         (item) => item.question_id === questionId
+    //     );
+    //     if (question && question.answers) {
+    //         question.answers = question.answers.map((item) => {
+    //             if (+item.id === +answerId) {
+    //                 item.issSelected = !item.issSelected;
+    //             }
+    //             return item;
+    //         });
+    //     }
+    //     let index = dataQuizClone.findIndex(
+    //         (item) => item.questionId === questionId
+    //     );
+    //     if (index > -1) {
+    //         dataQuizClone[index] = question;
+    //         setDataQuiz(dataQuizClone);
+    //     }
+    // };
     const handleCheckbox = (answerId, questionId) => {
-        let dataQuizClone = _.cloneDeep(dataQuiz); // react hook doesn't merge state
+        let dataQuizClone = _.cloneDeep(dataQuiz);
         let question = dataQuizClone.find(
-            (item) => +item.questionId === +questionId
+            (item) => item.question_id === questionId
         );
         if (question && question.answers) {
             question.answers = question.answers.map((item) => {
@@ -78,22 +136,23 @@ const DetailQuiz = () => {
             });
         }
         let index = dataQuizClone.findIndex(
-            (item) => +item.questionId === +questionId
+            (item) => item.question_id === questionId
         );
         if (index > -1) {
             dataQuizClone[index] = question;
             setDataQuiz(dataQuizClone);
         }
     };
+
     const handleFinishQuiz = async () => {
         let payload = {
-            quizId: +quizId,
+            quizId: quizId,
             answers: [],
         };
         let answers = [];
         if (dataQuiz && dataQuiz.length > 0) {
             dataQuiz.forEach((question) => {
-                let questionId = question.questionId;
+                let questionId = question.question_id;
                 let userAnswerId = [];
 
                 question.answers.forEach((a) => {
@@ -102,7 +161,7 @@ const DetailQuiz = () => {
                     }
                 });
                 answers.push({
-                    questionId: +questionId,
+                    questionId: questionId,
                     userAnswerId: userAnswerId,
                 });
             });
@@ -129,11 +188,26 @@ const DetailQuiz = () => {
         <div className="detail-quiz-container">
             <div className="left-content">
                 <div className="title">
-                    Quiz: {quizId} : {location?.state?.quizTitle}
+                    Quiz:  {location?.state?.quizTitle}
                 </div>
                 <hr></hr>
                 <div className="q-body">
-                    <img src="" alt="img" className="q-image"></img>
+                    {dataQuiz[index]?.image && (
+                        <img
+                            src={`http://localhost:8081/uploadsQuestion/${dataQuiz[index].image}`}
+                            alt="question"
+                            style={{
+                                maxWidth: "90%",
+                                maxHeight: "325px",
+                                objectFit: "contain",
+                                display: "block",
+                                margin: "0 auto",
+                                marginBottom: "-100px"
+                            }}
+                        />
+                    )}
+
+
                 </div>
                 <div className="q-content">
                     <Question
