@@ -36,9 +36,9 @@ const Header = () => {
                     <Nav className="me-auto">
                         <NavLink to="/" className="nav-link">Home</NavLink>
 
-                        {isAuthenticated && (account.role === "USER") && (
+                        {/* {isAuthenticated && (account.role === "USER") && (
                             <NavLink to="/users" className="nav-link">User</NavLink>
-                        )}
+                        )} */}
 
                         {account.role === "ADMIN" && (
                             <NavLink to="/admins" className="nav-link">Admin</NavLink>
@@ -63,7 +63,7 @@ const Header = () => {
                                 title="Settings"
                                 id="basic-nav-dropdown"
                             >
-                                <NavDropdown.Item>log out</NavDropdown.Item>
+                                <NavDropdown.Item>Log Out</NavDropdown.Item>
                                 <NavDropdown.Item>Profile</NavDropdown.Item>
                             </NavDropdown>
                         )}
