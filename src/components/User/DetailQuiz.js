@@ -5,7 +5,7 @@ import _, { set } from "lodash";
 import "./DetailQuiz.scss";
 import Question from "./Question";
 import ModalResult from "./ModalResult";
-
+import Countdown from "./countdown";
 const DetailQuiz = () => {
     const params = useParams();
     const quizId = params.id;
@@ -58,31 +58,36 @@ const DetailQuiz = () => {
 
         if (res && res.EC === 0) {
             let raw = res.DT;
-            let data = _.chain(raw)
-                .groupBy("question_id")
-                .map((value, key) => {
-                    let answers = [];
-                    let questionDescription, image = "";
 
-                    value.forEach((item, index) => {
+            let data = _.chain(raw)
+                .groupBy("question_id") // gom nhóm câu hỏi theo id
+                .map((items, questionId) => {
+                    // items là mảng các phần tử của cùng 1 câu hỏi
+                    let questionDescription = "";
+                    let image = "";
+                    let answers = [];
+
+                    items.forEach((item, index) => {
                         if (index === 0) {
                             questionDescription = item.description;
                             image = item.questionImage;
                         }
 
                         if (Array.isArray(item.answers)) {
-                            item.answers.forEach(ans => {
-                                ans.issSelected = false;
-                            });
-                            answers.push(...item.answers);
+                            // clone từng đáp án với issSelected = false
+                            const clonedAnswers = item.answers.map((ans) => ({
+                                ...ans,
+                                issSelected: false,
+                            }));
+                            answers.push(...clonedAnswers);
                         }
                     });
 
                     return {
-                        question_id: key,
-                        answers,
+                        question_id: questionId,
                         questionDescription,
                         image,
+                        answers,
                     };
                 })
                 .value();
@@ -90,6 +95,7 @@ const DetailQuiz = () => {
             setDataQuiz(data);
         }
     };
+
 
     const handlePrev = () => {
         if (index - 1 < 0) return;
@@ -129,7 +135,7 @@ const DetailQuiz = () => {
         );
         if (question && question.answers) {
             question.answers = question.answers.map((item) => {
-                if (+item.id === +answerId) {
+                if (item._id === answerId) {
                     item.issSelected = !item.issSelected;
                 }
                 return item;
@@ -157,7 +163,7 @@ const DetailQuiz = () => {
 
                 question.answers.forEach((a) => {
                     if (a.issSelected === true) {
-                        userAnswerId.push(a.id);
+                        userAnswerId.push(a._id);
                     }
                 });
                 answers.push({
@@ -245,7 +251,11 @@ const DetailQuiz = () => {
                     </button>
                 </div>
             </div>
-            <div className="right-content">count down</div>
+            <div className="right-content">
+                <h3>Time Left:</h3>
+                <Countdown initialSeconds={10} onTimeUp={handleFinishQuiz} />
+            </div>
+
             <ModalResult
                 show={isShowModalResult}
                 setShow={setIsShowModalResult}

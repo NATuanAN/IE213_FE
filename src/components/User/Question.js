@@ -33,9 +33,9 @@ const Question = (props) => {
                             <input
                                 className="form-check-input"
                                 type="checkbox"
-                                checked={a.isSelected}
+                                checked={a.issSelected}
                                 onChange={(event) => {
-                                    handleHandleCheckbox(event, a.id, data.questionId);
+                                    handleHandleCheckbox(event, a._id, data.question_id);
                                 }}
                             />
                             <label className="form-check-label">
