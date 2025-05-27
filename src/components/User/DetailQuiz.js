@@ -73,6 +73,9 @@ const DetailQuiz = () => {
         if (index < dataQuiz.length - 1) {
             setIndex(index + 1);
         }
+        else {
+
+        }
     };
 
 
@@ -181,27 +184,30 @@ const DetailQuiz = () => {
                             handlePrev();
                         }}
                     >
-                        Prev
+                        Previous
                     </button>
-                    <button
-                        className="btn btn-primary"
-                        onClick={() => {
-                            handleNext();
-                        }}
-                    >
-                        Next
-                    </button>
-                    <button
-                        className="btn btn-warning"
-                        onClick={() => handleFinishQuiz()}
-                    >
-                        Finish
-                    </button>
+
+                    {index < dataQuiz.length - 1 && (
+                        <button
+                            className="btn btn-primary"
+                            onClick={() => {
+                                handleNext();
+                            }}
+                        >
+                            Next
+                        </button>
+                    )}
                 </div>
             </div>
             <div className="right-content">
                 <h3>Time Left:</h3>
                 <Countdown initialSeconds={10} onTimeUp={handleFinishQuiz} />
+                <button
+                    className="btn btn-warning"
+                    onClick={() => handleFinishQuiz()}
+                >
+                    Finish
+                </button>
             </div>
 
             <ModalResult

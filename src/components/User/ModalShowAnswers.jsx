@@ -27,13 +27,13 @@ const ModalShowAnswers = ({ show, setShow, resultDetail }) => {
                             <ul>
                                 {item.correctAnswers.map((ansId) => (
                                     <li key={ansId} style={{ color: "green" }}>
-                                        ✅ Correct Answer : {ansId}
+                                        ✅ Correct Answer : <p style={{color:"black"}}>{ansId}</p>
                                     </li>
                                 ))}
                                 
                                 {item.userAnswersId.map((ansId) => (
                                     <li key={ansId} style={{ color: item.correctAnswers.includes(ansId) ? "green" : "red" }}>
-                                        {item.correctAnswers.includes(ansId) ? "🟢" : "🔴"} Your Answer: {ansId}
+                                        {item.correctAnswers.includes(ansId) ? "🟢" : "🔴"} Your Answer: <p style={{color:"black"}}>{ansId}</p>
                                     </li>
                                 ))}
                             </ul>

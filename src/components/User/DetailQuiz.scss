@@ -40,10 +40,27 @@
             justify-content: center;
         }
     }
-    .right-content {
-        border: 2px solid #ccc;
-        width: 30%;
-        border-radius: 5px;
-        padding: 20px;
-    }
+        .right-content {
+            border: 2px solid #ccc;
+            width: 30%;
+            border-radius: 5px;
+            padding: 20px;
+    
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* căn giữa theo chiều ngang */
+        }
+                .right-content button {
+                    margin-top: 100px;
+        
+                    font-size: 18px;
+                    /* chữ to hơn */
+                    padding: 12px 24px;
+                    /* khoảng cách trong nút lớn hơn */
+                    min-width: 150px;
+                    /* chiều rộng tối thiểu */
+                    border-radius: 8px;
+                    /* bo góc nhẹ cho đẹp */
+                }
 }

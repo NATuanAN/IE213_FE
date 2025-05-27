@@ -8,7 +8,7 @@ const TableUserPaginate = (props) => {
     const handlePageClick = (event) => {
         props.fetchListUserWithPaginate(event.selected + 1);
         props.setCurrentPage(event.selected + 1);
-        
+
     };
     return (
         <div>
@@ -33,9 +33,9 @@ const TableUserPaginate = (props) => {
                                     <td>{item.username}</td>
                                     <td>{item.role}</td>
                                     <td>
-                                        <button className="btn btn-secondary">
+                                        {/* <button className="btn btn-secondary">
                                             View
-                                        </button>
+                                        </button> */}
                                         <button
                                             className="btn btn-warning mx-3"
                                             onClick={() => {

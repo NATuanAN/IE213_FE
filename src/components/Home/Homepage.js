@@ -23,7 +23,7 @@ const Home = () => {
                     {isAuthenticated === true ? (
                         <button
                             onClick={() => {
-                                navigate("/users");
+                                navigate("/listquizz");
                             }}
                         >
                             Doing Quiz now
