@@ -10,6 +10,7 @@ const ModalDelete = (props) => {
     const handleClose = () => setShow(false);
 
     const handleSubmitDeleteUser = async () => {
+        const token = localStorage.getItem("accessToken");
         let data = await deleteUser(dataDelete.id);
         if (data && data.EC == 0) {
             toast.success(data.EM);

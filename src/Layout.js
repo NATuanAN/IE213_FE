@@ -14,6 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ManageQuiz from "./components/Admin/Content/Quiz/ManageQuiz.js";
 import Questions from "./components/Admin/Content/Question/Questions.js";
 import Unauthorized from "./components/Admin/unauth.jsx";
+import UserDetail from "./components/User/User.js"
 const NotFound = () => {
     return (
         <div className="container mt-3 alert alert-danger">
@@ -38,6 +39,7 @@ const Layout = () => {
                     <Route path="manage-questions" element={<Questions />} />
 
                 </Route>
+                <Route path="manage-users/:id" element={<UserDetail />} />
                 <Route path="/unauthorized" element={<Unauthorized />} />
                 <Route path="/login" element={<Login></Login>} />
                 <Route path="/register" element={<Register></Register>} />

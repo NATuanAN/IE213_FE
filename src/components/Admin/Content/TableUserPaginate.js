@@ -1,9 +1,10 @@
 import ReactPaginate from "react-paginate";
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 
 const TableUserPaginate = (props) => {
     let { listUser, pageCount } = props;
-
+    const navigate = useNavigate();
     // Invoke when user click to request another page.
     const handlePageClick = (event) => {
         props.fetchListUserWithPaginate(event.selected + 1);
@@ -33,9 +34,12 @@ const TableUserPaginate = (props) => {
                                     <td>{item.username}</td>
                                     <td>{item.role}</td>
                                     <td>
-                                        {/* <button className="btn btn-secondary">
+                                        <button
+                                            className="btn btn-secondary"
+                                            onClick={() => navigate(`/manage-users/${item.id}`)}
+                                        >
                                             View
-                                        </button> */}
+                                        </button>
                                         <button
                                             className="btn btn-warning mx-3"
                                             onClick={() => {
