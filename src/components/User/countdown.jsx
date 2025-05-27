@@ -1,42 +1,38 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Countdown = ({ initialSeconds, onTimeUp }) => {
-  const [seconds, setSeconds] = useState(initialSeconds);
+    const [seconds, setSeconds] = useState(initialSeconds);
+    const [called, setCalled] = useState(false); // Để đảm bảo gọi hàm 1 lần duy nhất
 
-  useEffect(() => {
-    if (seconds === 0) {
-      onTimeUp(); // tự động gọi khi hết giờ
-      return;
-    }
+    useEffect(() => {
+        let timer;
 
-    const timerId = setTimeout(() => {
-      setSeconds(seconds - 1);
-    }, 1000);
+        if (seconds > 0) {
+            timer = setInterval(() => {
+                setSeconds((prev) => prev - 1);
+            }, 1000);
+        } else {
+            // seconds đã về 0
+            if (!called) {
+                onTimeUp();          // gọi hàm finish
+                setCalled(true);     // đánh dấu đã gọi rồi
+            }
+        }
 
-    return () => clearTimeout(timerId);
-  }, [seconds, onTimeUp]);
+        return () => clearInterval(timer);
+    }, [seconds, onTimeUp, called]);
 
-  // format 00:00 cho đẹp
-  const formatTime = (sec) => {
-    const m = Math.floor(sec / 60)
-      .toString()
-      .padStart(2, "0");
-    const s = (sec % 60).toString().padStart(2, "0");
-    return `${m}:${s}`;
-  };
+    const formatTime = (s) => {
+        const mins = Math.floor(s / 60);
+        const secs = s % 60;
+        return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+    };
 
-  return (
-    <div
-      style={{
-        fontSize: "1.8rem",
-        fontWeight: "bold",
-        color: seconds <= 10 ? "red" : "black",
-        userSelect: "none",
-      }}
-    >
-      {formatTime(seconds)}
-    </div>
-  );
+    return (
+        <div className="countdown-timer" style={{ fontSize: "24px", fontWeight: "bold" }}>
+            ⏳ {formatTime(seconds)}
+        </div>
+    );
 };
 
 export default Countdown;

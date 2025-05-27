@@ -21,38 +21,6 @@ const DetailQuiz = () => {
         fetchQuestion();
     }, [quizId]);
 
-    // const fetchQuestion = async () => {
-    //     let res = await getDataQuiz(quizId);
-
-    //     if (res && res.EC === 0) {
-    //         let raw = res.DT;
-    //         let data = _.chain(raw)
-    //             //Group the elements of array based on 'id' property
-    //             .groupBy("id")
-    //             //'key' is group'name (color),"value " is the array of objects
-    //             .map((value, key) => {
-    //                 let answers = [];
-    //                 let questionDescription,
-    //                     image = "";
-    //                 value.forEach((item, index) => {
-    //                     if (index === 0) {
-    //                         questionDescription = item.description;
-    //                         image = item.image;
-    //                     }
-    //                     item.answers.issSelected = false;
-    //                     answers.push(item.answers);
-    //                 });
-    //                 return {
-    //                     questionId: key,
-    //                     answers,
-    //                     questionDescription,
-    //                     image,
-    //                 };
-    //             })
-    //             .value();
-    //         setDataQuiz(data);
-    //     }
-    // };
     const fetchQuestion = async () => {
         let res = await getDataQuiz(quizId);
 
@@ -107,27 +75,7 @@ const DetailQuiz = () => {
         }
     };
 
-    // const handleCheckbox = (answerId, questionId) => {
-    //     let dataQuizClone = _.cloneDeep(dataQuiz); // react hook doesn't merge state
-    //     let question = dataQuizClone.find(
-    //         (item) => item.question_id === questionId
-    //     );
-    //     if (question && question.answers) {
-    //         question.answers = question.answers.map((item) => {
-    //             if (+item.id === +answerId) {
-    //                 item.issSelected = !item.issSelected;
-    //             }
-    //             return item;
-    //         });
-    //     }
-    //     let index = dataQuizClone.findIndex(
-    //         (item) => item.questionId === questionId
-    //     );
-    //     if (index > -1) {
-    //         dataQuizClone[index] = question;
-    //         setDataQuiz(dataQuizClone);
-    //     }
-    // };
+
     const handleCheckbox = (answerId, questionId) => {
         let dataQuizClone = _.cloneDeep(dataQuiz);
         let question = dataQuizClone.find(
@@ -180,7 +128,7 @@ const DetailQuiz = () => {
                 setDataModalResult({
                     countCorrect: res.DT.countCorrect,
                     countTotal: res.DT.countTotal,
-                    quizData: res.DT.quizData,
+                    resultDetail: res.DT.quizData,
                 });
                 setIsShowModalResult(true);
             } else {

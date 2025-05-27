@@ -1,7 +1,11 @@
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import ModalShowAnswers from "./ModalShowAnswers"; // nhớ kiểm tra đúng đường dẫn
 
 const ModalResult = ({ show, setShow, dataModalResult }) => {
+    const [showAnswer, setShowAnswer] = useState(false);
+
     const handleClose = () => setShow(false);
 
     const percent = dataModalResult.countTotal
@@ -25,13 +29,21 @@ const ModalResult = ({ show, setShow, dataModalResult }) => {
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={() => alert("Show answers feature coming soon!")}>
+                <Button variant="outline-info" onClick={() => setShowAnswer(true)}>
                     Show Answers
                 </Button>
+
                 <Button variant="primary" onClick={handleClose}>
                     Close
                 </Button>
             </Modal.Footer>
+
+            {/* Modal phụ hiện chi tiết đáp án */}
+            <ModalShowAnswers
+                show={showAnswer}
+                setShow={setShowAnswer}
+                resultDetail={dataModalResult.resultDetail}
+            />
         </Modal>
     );
 };
