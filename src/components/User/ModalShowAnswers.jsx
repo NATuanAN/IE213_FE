@@ -46,7 +46,7 @@ const ModalShowAnswers = ({ show, setShow, resultDetail }) => {
                 )}
             </Modal.Body>
             <Modal.Footer>
-                <Button className="btn btn-success" onClick={() => navigate("/users")}>
+                <Button className="btn btn-success" onClick={() => navigate("/listquizz")}>
                     Go to Users Page
                  </Button>
                 <Button variant="secondary" onClick={handleClose}>
