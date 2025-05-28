@@ -142,6 +142,7 @@ const DetailQuiz = () => {
     };
 
     return (
+
         <div className="detail-quiz-container">
             <div className="left-content">
                 <div className="title">
@@ -178,14 +179,15 @@ const DetailQuiz = () => {
                     />
                 </div>
                 <div className="footer">
-                    <button
+                    {index !== 0 && (<button
                         className="btn btn-secondary"
                         onClick={() => {
                             handlePrev();
                         }}
                     >
                         Previous
-                    </button>
+                    </button>)}
+
 
                     {index < dataQuiz.length - 1 && (
                         <button

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 const Countdown = ({ initialSeconds, onTimeUp }) => {
     const [seconds, setSeconds] = useState(initialSeconds);
-    const [called, setCalled] = useState(false); // Để đảm bảo gọi hàm 1 lần duy nhất
+    const [called, setCalled] = useState(false); // gọi onTimeUp chỉ 1 lần
 
     useEffect(() => {
         let timer;
@@ -12,10 +12,9 @@ const Countdown = ({ initialSeconds, onTimeUp }) => {
                 setSeconds((prev) => prev - 1);
             }, 1000);
         } else {
-            // seconds đã về 0
             if (!called) {
-                onTimeUp();          // gọi hàm finish
-                setCalled(true);     // đánh dấu đã gọi rồi
+                onTimeUp();
+                setCalled(true);
             }
         }
 
@@ -28,10 +27,33 @@ const Countdown = ({ initialSeconds, onTimeUp }) => {
         return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
     };
 
+    // Kiểm tra còn dưới 10 giây hay không để bật hiệu ứng
+    const isWarning = seconds > 0 && seconds <= 10;
+
     return (
-        <div className="countdown-timer" style={{ fontSize: "24px", fontWeight: "bold" }}>
-            ⏳ {formatTime(seconds)}
-        </div>
+        <>
+            <style>
+                {`
+                    .countdown-timer {
+                        font-size: 24px;
+                        font-weight: bold;
+                        transition: color 0.3s ease;
+                    }
+                    .warning {
+                        color: red;
+                        animation: blink 1s infinite;
+                    }
+                    @keyframes blink {
+                        0%, 50%, 100% { opacity: 1; }
+                        25%, 75% { opacity: 0; }
+                    }
+                `}
+            </style>
+
+            <div className={`countdown-timer ${isWarning ? "warning" : ""}`}>
+                ⏳ {formatTime(seconds)}
+            </div>
+        </>
     );
 };
 
