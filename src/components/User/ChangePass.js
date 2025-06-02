@@ -13,7 +13,7 @@ const ChangePass = () => {
 
     const handleChangePassword = async () => {
         if (!oldPassword || !newPassword) {
-            toast.error("Vui lòng điền đầy đủ thông tin");
+            toast.error("Please fill in all fields");
             return;
         }
         setLoading(true);
@@ -26,7 +26,7 @@ const ChangePass = () => {
                 toast.error(data.EM);
             }
         } catch (error) {
-            toast.error("Lỗi server hoặc mạng");
+            toast.error("Error in server or internet");
         } finally {
             setLoading(false);
         }
