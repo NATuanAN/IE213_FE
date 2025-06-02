@@ -6,3 +6,8 @@ export const doLogin = (data) => {
         payload: data,
     };
 };
+export const doLogout = () => {
+    return {
+        type: "USER_LOGOUT",
+    };
+};

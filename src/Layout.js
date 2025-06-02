@@ -15,6 +15,7 @@ import ManageQuiz from "./components/Admin/Content/Quiz/ManageQuiz.js";
 import Questions from "./components/Admin/Content/Question/Questions.js";
 import Unauthorized from "./components/Admin/unauth.jsx";
 import UserDetail from "./components/User/User.js"
+import ChangePass from "./components/User/ChangePass.js";
 const NotFound = () => {
     return (
         <div className="container mt-3 alert alert-danger">
@@ -22,6 +23,8 @@ const NotFound = () => {
         </div>
     );
 };
+
+
 
 const Layout = () => {
     return (
@@ -37,13 +40,13 @@ const Layout = () => {
                     <Route path="manage-users" element={<ManageUser />} />
                     <Route path="manage-quizzes" element={<ManageQuiz />} />
                     <Route path="manage-questions" element={<Questions />} />
-
                 </Route>
                 <Route path="manage-users/:id" element={<UserDetail />} />
                 <Route path="/unauthorized" element={<Unauthorized />} />
                 <Route path="/login" element={<Login></Login>} />
                 <Route path="/register" element={<Register></Register>} />
                 <Route path="*" element={<NotFound />} />
+                <Route path="/users/change-password/:id" element={<ChangePass />} />
             </Routes>
             <ToastContainer
                 position="top-right"

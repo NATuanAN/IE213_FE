@@ -78,7 +78,7 @@ const Login = (props) => {
                     </button>
                 </div>
             </div>
-            <div className="title col-4 mx-auto">Hoidan IT</div>
+            <div className="title col-4 mx-auto">GROUP 14</div>
             <div className="welcome col-4 mx-auto">hello, who's this?</div>
             <div className="content-form col-4 mx-auto">
                 <div className="from-group ">

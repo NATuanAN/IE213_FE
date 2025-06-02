@@ -43,6 +43,12 @@ const postLogin = async (userEmail, userPassword) => {
     // return await axios.post("/api/v1/login", { userEmail, userPassword });
     // };
 };
+const postChangePassword = async (userId, oldPassword, newPassword) => {
+    return await axios.post(`/api/v1/change-password/${userId}`, {
+        oldPassword,
+        newPassword,
+    });
+};
 
 const postRegister = async (userEmail, userName, userPassword) => {
     return await axios.post("/api/v1/register", {
@@ -127,5 +133,6 @@ export {
     deleteQuizForAdmin,//
     postCreateNewAnswerForQuestion,//
     postCreateNewQuestionForQuiz,//
-    getUserbyId//
+    getUserbyId,//
+    postChangePassword,//
 };

@@ -1,41 +1,10 @@
-// import { FETCH_USER_LOGIN_SUCCESS } from "../action/userAction";
 
-// const INITIAL_STATE = {
-//     account: {
-//         access_token: "",
-//         refresh_token: "",
-//         username: "",
-//         image: "",
-//         role: "",
-//     },
-//     isAuthenticated: false,
-// };
-// const userReducer = (state = INITIAL_STATE, action) => {
-//     switch (action.type) {
-//         case FETCH_USER_LOGIN_SUCCESS:
-//             return {
-//                 ...state,
-//                 count: {
-//                     access_token: action?.payload?.DT?.accessToken,
-//                     refresh_token: action?.payload?.DT?.refreshToken,
-//                     username: action?.payload?.DT?.username,
-//                     image: action?.payload?.DT?.image,
-//                     role: action?.payload?.DT?.role,
-//                 },
-//                 isAuthenticated: true,
-//             };
-
-//         default:
-//             return state;
-//     }
-// };
-
-// export default userReducer;
 
 import { FETCH_USER_LOGIN_SUCCESS } from "../action/userAction";
 
 const INITIAL_STATE = {
     account: {
+        id: "", // <-- Thêm vào đây
         accessToken: "",
         refreshToken: "",
         username: "",
@@ -51,13 +20,19 @@ const userReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 account: {
+                    id: action.payload.id,
                     accessToken: action.payload.accessToken,
                     refreshToken: action.payload.refreshToken,
                     username: action.payload.username,
-                    image: action.payload.image || "", // nếu không có image
+                    image: action.payload.image || "",
                     role: action.payload.role,
                 },
                 isAuthenticated: true,
+            };
+
+        case "USER_LOGOUT":
+            return {
+                ...INITIAL_STATE, // Reset tất cả về trạng thái ban đầu
             };
 
         default:
